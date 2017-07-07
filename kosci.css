@@ -1,0 +1,48 @@
+html body {
+    background-color: #888888;
+}
+
+h1 {
+    text-align: center;
+    font-family: "Comic Sans MS ", cursive, sans-serif;
+}
+
+#sterowanie {
+    text-align: center;
+}
+
+#oblicz, #reset {
+    background-color: #666666;
+    margin: 0 auto 10px;
+    padding: 5px;
+    font-size: 150%;
+    color: white;
+    font-family: "Comic Sans MS ", cursive, sans-serif;
+    border: solid 2px #EEEEEE;
+    border-radius: 5px;
+
+}
+
+table {
+    margin: auto;
+    font-family: "Comic Sans MS ", cursive, sans-serif;
+
+}
+
+table input {
+    font-family: "Comic Sans MS ", cursive, sans-serif;
+
+}
+
+.gracz {
+    background-color: darkgreen;
+    color: white;
+}
+
+.tSuma, .uSuma {
+    background-color: #DDDDDD;
+}
+
+.sSumaRazem {
+    background-color: #BBBBBB;
+}

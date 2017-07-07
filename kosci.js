@@ -73,9 +73,27 @@ Object.keys(tabelka).forEach(function (key) {
         switch (key) {
             case "gracz":
                 tabelkaHTML +=
-                    ("<td><input value='Gracz' style='text-align:right;' type='text' " +
+                    ("<td><input value='Gracz' style='text-align:center;' type='text' class='gracz'" +
                     "name='" + key + i + "' id='" + key + i + "'></td>");
                 break;
+            case "tSuma":
+                tabelkaHTML +=
+                    ("<td><input value=2 style='text-align:right;' type='text' class='tSuma'" +
+                    "name='" + key + i + "' id='" + key + i + "'></td>");
+                    break;
+            case "uSuma":
+                tabelkaHTML +=
+                    ("<td><input value=2 style='text-align:right;' type='text' class='uSuma'" +
+                    "name='" + key + i + "' id='" + key + i + "'></td>");
+                break;
+            case "sSumaRazem":
+                tabelkaHTML +=
+                    ("<td><input value=2 style='text-align:right;' type='text' class='sSumaRazem'" +
+                    "name='" + key + i + "' id='" + key + i + "'></td>");
+                break;
+
+
+
             default:
                 tabelkaHTML +=
                     ("<td><input value=2 style='text-align:right;' type='text' " +
@@ -121,6 +139,7 @@ var obliczArek = function () {
             sumaU += parseInt(element.value) || 0;
         }
         var elementSumaRU = document.getElementById("uSuma" + i);
+        elementSumaRT = document.getElementById("tSuma" + i);
         elementSumaRU.value = sumaU;
         var element = document.getElementById("sSumaRazem" + i);
         element.value = parseInt(elementSumaRT.value) + parseInt(elementSumaRU.value);
@@ -131,7 +150,7 @@ var obliczArek = function () {
 
 var resetujGre = function () {
     var klucz = "213";
-    var wprowadzonyKlucz = prompt("Aby rozpocząc nową grę wprowadź: 213");
+    var wprowadzonyKlucz = "213" //prompt("Aby rozpocząc nową grę wprowadź: 213");
     if (klucz == wprowadzonyKlucz) {
         for (var i = 1; i <= liczbaGraczy; i += 1) {
             for (var j = 1; j <= 6; j += 1) {
