@@ -41,8 +41,11 @@ table input {
 
 .tSuma, .uSuma {
     background-color: #DDDDDD;
+
 }
 
 .sSumaRazem {
     background-color: #BBBBBB;
+    font-family: "Comic Sans MS ", cursive, sans-serif;
+
 }

@@ -150,7 +150,7 @@ var obliczArek = function () {
 
 var resetujGre = function () {
     var klucz = "213";
-    var wprowadzonyKlucz = "213" //prompt("Aby rozpocząc nową grę wprowadź: 213");
+    var wprowadzonyKlucz = prompt("Aby rozpocząc nową grę wprowadź: 213");
     if (klucz == wprowadzonyKlucz) {
         for (var i = 1; i <= liczbaGraczy; i += 1) {
             for (var j = 1; j <= 6; j += 1) {
