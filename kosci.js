@@ -103,6 +103,13 @@ var obliczArek = function () {
             sumaT += parseInt(element.value) || 0;
         }
         var elementSumaRT = document.getElementById("tSuma" + i);
+        if (sumaT > 15) {
+            sumaT += 50;
+        } else if (sumaT < 0) {
+            sumaT -= 100;
+        } else {
+            sumaT += 0;
+        }
         elementSumaRT.value = sumaT;
     }
 
@@ -123,17 +130,20 @@ var obliczArek = function () {
 }
 
 var resetujGre = function () {
-    //alert("Atrapa-ResetujGre");
-    for (var i = 1; i <= liczbaGraczy; i += 1) {
-        for (var j = 1; j <= 6; j += 1) {
-            var elementT = document.getElementById('t' + j + i);
-            elementT.value = "";
-        }
-        for (var j = 1; j <= 8; j += 1) {
-            var elementT = document.getElementById('u' + j + i);
-            elementT.value = "";
-        }
+    var klucz = "213";
+    var wprowadzonyKlucz = prompt("Aby rozpocząc nową grę wprowadź: 213");
+    if (klucz == wprowadzonyKlucz) {
+        for (var i = 1; i <= liczbaGraczy; i += 1) {
+            for (var j = 1; j <= 6; j += 1) {
+                var elementT = document.getElementById('t' + j + i);
+                elementT.value = "";
+            }
+            for (var j = 1; j <= 8; j += 1) {
+                var elementT = document.getElementById('u' + j + i);
+                elementT.value = "";
+            }
 
+        }
     }
 
     obliczArek();
