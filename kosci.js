@@ -3,6 +3,8 @@
  */
 
 var liczbaGraczy = 4;
+var rzut = 1;
+var wybranaKosc = [false, false, false, false, false];
 var tabelka = {
     gracz: {
         tytul: "Gracz"
@@ -41,15 +43,18 @@ var tabelka = {
         tytul: "Czwórka"
     },
     u5: {
-        tytul: "Mały strit"
+        tytul: "Full"
     },
     u6: {
-        tytul: "Duży strit"
+        tytul: "Mały strit"
     },
     u7: {
-        tytul: "Generał"
+        tytul: "Duży strit"
     },
     u8: {
+        tytul: "Generał"
+    },
+    u9: {
         tytul: "Szansa"
     },
     uSuma: {
@@ -64,7 +69,6 @@ var elementTabelka = document.getElementById("tabelka");
 
 tabelkaHTML = "<table>";
 Object.keys(tabelka).forEach(function (key) {
-    console.log(key, tabelka[key].tytul);
     tabelkaHTML += "<tr><td>";
     tabelkaHTML += tabelka[key].tytul;
     tabelkaHTML += "</td>";
@@ -80,7 +84,7 @@ Object.keys(tabelka).forEach(function (key) {
                 tabelkaHTML +=
                     ("<td><input value=2 style='text-align:right;' type='text' class='tSuma'" +
                     "name='" + key + i + "' id='" + key + i + "'></td>");
-                    break;
+                break;
             case "uSuma":
                 tabelkaHTML +=
                     ("<td><input value=2 style='text-align:right;' type='text' class='uSuma'" +
@@ -93,7 +97,6 @@ Object.keys(tabelka).forEach(function (key) {
                 break;
 
 
-
             default:
                 tabelkaHTML +=
                     ("<td><input value=2 style='text-align:right;' type='text' " +
@@ -104,7 +107,6 @@ Object.keys(tabelka).forEach(function (key) {
     tabelkaHTML += "</tr>";
 
 });
-//tabelkaHTML += "</tr>"
 
 tabelkaHTML += "</table>"
 
@@ -150,14 +152,15 @@ var obliczArek = function () {
 
 var resetujGre = function () {
     var klucz = "213";
-    var wprowadzonyKlucz = prompt("Aby rozpocząc nową grę wprowadź: 213");
+    //var wprowadzonyKlucz = prompt("Aby rozpocząc nową grę wprowadź: 213");
+    wprowadzonyKlucz = klucz;
     if (klucz == wprowadzonyKlucz) {
         for (var i = 1; i <= liczbaGraczy; i += 1) {
             for (var j = 1; j <= 6; j += 1) {
                 var elementT = document.getElementById('t' + j + i);
                 elementT.value = "";
             }
-            for (var j = 1; j <= 8; j += 1) {
+            for (var j = 1; j <= 9; j += 1) {
                 var elementT = document.getElementById('u' + j + i);
                 elementT.value = "";
             }
@@ -165,13 +168,101 @@ var resetujGre = function () {
         }
     }
 
+    wyczyscZaznaczenia();
+
+    ustawPierwszyRzut();
+
     obliczArek();
+
 }
 
+var rzutKosci = function () {
+    var wynik = [];
+    if (rzut === 1) {
+        wyczyscZaznaczenia();
+    }
+    rzut += 1;
+
+    for (var i = 1; i <= 5; i += 1) {
+        if (!wybranaKosc[i - 1]) {
+            wynik[i - 1] = getRandomIntInclusive(1, 6);
+            kosc = document.getElementById("kosc" + i);
+            kosc.setAttribute("src", "wynik" + wynik[i - 1] + ".svg");
+        }
+    }
+    if (rzut > 3) {
+        rzut = 1;
+    }
+    var nrRzutu = document.getElementById("nrRzutu");
+    nrRzutu.innerHTML = "(" + (rzut) + ")";
+    //console.log(wybranaKosc);
+}
+
+var zmienZaznaczenie = function (nrKosci) {
+    kosc = document.getElementById("kosc" + nrKosci);
+    if (wybranaKosc[nrKosci - 1]) {
+        kosc.style.borderColor = "transparent";
+    } else {
+        kosc.style.borderColor = "black";
+    }
+
+    wybranaKosc[nrKosci - 1] = !wybranaKosc[nrKosci - 1];
+
+    //console.log(wybranaKosc);
+
+}
+
+var wyczyscZaznaczenia = function () {
+    for (var i = 1; i <= 5; i += 1) {
+        if (wybranaKosc[i - 1]) {
+            zmienZaznaczenie(i);
+        }
+    }
+
+}
+
+var ustawPierwszyRzut = function () {
+    rzut = 1;
+    var nrRzutu = document.getElementById("nrRzutu");
+    nrRzutu.innerHTML = "(" + (rzut) + ")";
+
+}
+
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
+}
+
+// Podpięcie zdarzeń
+
+// Obliczenie sum
 var elementOblicz = document.getElementById("oblicz");
 elementOblicz.addEventListener('click', obliczArek);
 
+// Nowa gra - reset ustawień
 var elementReset = document.getElementById("reset");
 elementReset.addEventListener('click', resetujGre);
 
+// Rzut kości
+var elementRzut = document.getElementById("rzut");
+elementRzut.addEventListener('click', rzutKosci);
+
+// Pozostawienie kości - zaznaczanie/ odznaczenie kości, które nie będą rzucane
+for (let i = 1; i <= 5; i += 1) {
+    var elementKosc = document.getElementById("kosc" + i);
+    elementKosc.addEventListener('click', function () {
+        zmienZaznaczenie(i);
+    });
+}
+
+// Następny gracz
+var elementNastepnyGracz = document.getElementById("nastepny");
+elementNastepnyGracz.addEventListener('click', function () {
+    wyczyscZaznaczenia();
+    ustawPierwszyRzut();
+});
+
+// Ustaw nową grę
 resetujGre();

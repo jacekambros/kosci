@@ -11,7 +11,7 @@ h1 {
     text-align: center;
 }
 
-#oblicz, #reset {
+#oblicz, #reset, #rzut, #nastepny {
     background-color: #666666;
     margin: 0 auto 10px;
     padding: 5px;
@@ -20,6 +20,7 @@ h1 {
     font-family: "Comic Sans MS ", cursive, sans-serif;
     border: solid 2px #EEEEEE;
     border-radius: 5px;
+    width: 15%;
 
 }
 
@@ -48,4 +49,16 @@ table input {
     background-color: #BBBBBB;
     font-family: "Comic Sans MS ", cursive, sans-serif;
 
+}
+
+.kosc {
+    width: 10%;
+    border: 5px solid black;
+    border-color: transparent;
+}
+
+
+
+.rzut {
+    text-align: center;
 }
